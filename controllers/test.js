@@ -6,16 +6,13 @@ exports.allTests = function(req, res) {
     .catch(e => next(e));
 }
 
-var fs = require('fs');
-var cheerio = require('cheerio');
-var multer = require('multer');
-
 exports.upload = function(req, res) {
+    var fs = require('fs');
+    var cheerio = require('cheerio');
         //проверка на наличие файла от клиента
-        /*
         if(req.file) {
           //parse
-          fs.readFileSync(req.file.path, 'utf8', function(err, data) {
+          fs.readFile(req.file.path, 'utf8', function(err, data) {
             $ = cheerio.load(data);
             var allQuestions = $('.que.correct');
             allQuestions.each(function() {
@@ -25,7 +22,7 @@ exports.upload = function(req, res) {
                 //console.log($(this).attr("id"))
                 console.log(q);
                 console.log(a);
-                
+
                 var test = new Test({ 
                   question: q,
                   answer: a
@@ -40,6 +37,5 @@ exports.upload = function(req, res) {
         })
       }else{
         console.log("no file")
-      }*/
-      console.log(req.file)
+      }
 }

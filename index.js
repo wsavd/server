@@ -15,6 +15,6 @@ mongoose.connect(app.get('database'))
 var tests = require('./routes/test');
 app.use('/api/v1', tests)
 
-app.listen(3000, function () {
+app.listen(3001, function () {
   console.log('Example app listening on port 3000!');
 });

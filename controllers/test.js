@@ -12,30 +12,30 @@ exports.upload = function(req, res) {
         //проверка на наличие файла от клиента
         if(req.file) {
           //parse
-          fs.readFile(req.file.path, 'utf8', function(err, data) {
-            $ = cheerio.load(data);
-            var allQuestions = $('.que.correct');
-            allQuestions.each(function() {
-                //вопрос
-                var q = $('.qtext', this).text();//вопрос
-                var a = $('.answer .correct label', this).text();//ответ
-                //console.log($(this).attr("id"))
-                console.log(q);
-                console.log(a);
+            fs.readFile(req.file.path, 'utf8', function(err, data) {
+                $ = cheerio.load(data);
+                var allQuestions = $('.que.correct');
+                allQuestions.each(function() {
+                    //вопрос
+                    var q = $('.qtext', this).text();//вопрос
+                    var a = $('.answer .correct label', this).text();//ответ
+                    //console.log($(this).attr("id"))
+                    //console.log(q);
+                    //console.log(a);
 
-                var test = new Test({ 
-                  question: q,
-                  answer: a
+                    var test = new Test({ 
+                    question: q,
+                    answer: a
+                    })
+                    test.save();
                 })
-                test.save(function(err, result){
-                  console.log(result)
-                })
+            //console.log("Верных ответов: " + allQuestions.length)
+            fs.unlinkSync(req.file.path, function(){
+                res.json({"message" : "Ответы успешно сохранены"})
             })
-    
-            console.log("Верных ответов: " + allQuestions.length)
-            fs.unlinkSync(req.file.path)
+            
         })
       }else{
-        console.log("no file")
+        res.json({"message": "Файл не выбран"})
       }
 }

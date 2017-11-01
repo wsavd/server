@@ -16,5 +16,5 @@ var tests = require('./routes/test');
 app.use('/api/v1', tests)
 
 app.listen(3001, function () {
-  console.log('Example app listening on port 3000!');
+  console.log('Example app listening on port 3001!');
 });

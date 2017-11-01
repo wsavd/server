@@ -30,10 +30,8 @@ exports.upload = function(req, res) {
                     test.save();
                 })
             //console.log("Верных ответов: " + allQuestions.length)
-            fs.unlinkSync(req.file.path, function(){
-                res.json({"message" : "Ответы успешно сохранены"})
-            })
-            
+            fs.unlinkSync(req.file.path)
+            res.json({"message": "Ответы успешно добавлены"})
         })
       }else{
         res.json({"message": "Файл не выбран"})

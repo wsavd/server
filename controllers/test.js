@@ -19,15 +19,19 @@ exports.upload = function(req, res) {
                     //вопрос
                     var q = $('.qtext', this).text();//вопрос
                     var a = $('.answer .correct label', this).text();//ответ
+
+                    Test.find({question: q}, {$exists: true}, function(err, result) {
+                        if(result.length==0){
+                            var test = new Test({ 
+                                question: q,
+                                answer: a
+                                })
+                                test.save();
+                            }
+                    })
                     //console.log($(this).attr("id"))
                     //console.log(q);
                     //console.log(a);
-
-                    var test = new Test({ 
-                    question: q,
-                    answer: a
-                    })
-                    test.save();
                 })
             //console.log("Верных ответов: " + allQuestions.length)
             fs.unlinkSync(req.file.path)

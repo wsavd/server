@@ -1,5 +1,8 @@
 var express = require('express');
+const path = require('path');
 var app = express();
+
+app.use(express.static(path.join(__dirname, 'client/build')));
 
 const cors = require('cors');
 app.use(cors());
@@ -14,6 +17,10 @@ mongoose.connect(app.get('database'))
 
 var tests = require('./routes/test');
 app.use('/api/v1', tests)
+
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname+'/client/build/index.html'));
+});
 
 app.listen(3001, function () {
   console.log('Example app listening on port 3001!');

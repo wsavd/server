@@ -15,7 +15,7 @@ mongoose.connect(app.get('database'))
   .then(() =>  console.log('connection succesful'))
   .catch((err) => console.error(err));
 
-var tests = require('./routes/test');
+var tests = require('./routes/test')
 app.use('/api/v1', tests)
 
 app.get('/', (req, res) => {
